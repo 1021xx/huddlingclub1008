@@ -25,3 +25,25 @@ export const mockResponses: MockResponse[] = [
   { name: "이모임", status: "no", companions: 0 },
   { name: "박함께", status: "yes", companions: 2 },
 ];
+
+export type MockInvitationRecord = MockInvitation & {
+  id: string;
+  responses: MockResponse[];
+};
+
+/** demo의 기존 초대장·응답을 유지하면서 빈 목록 실습용 데이터를 추가합니다. */
+export const mockInvitations: MockInvitationRecord[] = [
+  { ...mockInvitation, id: "demo", responses: mockResponses },
+  {
+    id: "empty",
+    title: "응답을 기다리는 초대장",
+    date: mockInvitation.date,
+    location: mockInvitation.location,
+    body: "아직 참석 응답이 없는 실습용 초대장이에요.",
+    responses: [],
+  },
+];
+
+export function getMockInvitation(id: string) {
+  return mockInvitations.find(invitation => invitation.id === id);
+}

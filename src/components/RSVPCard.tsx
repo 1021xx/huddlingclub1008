@@ -17,8 +17,9 @@ export type RSVPCardProps = {
     state?: "form" | "done";
     response?: RSVPResponse;
     onSubmit?: (response: RSVPResponse) => void | Promise<void>;
+    demo?: boolean;
 };
-export default function RSVPCard({ className = "", state = "form", response, onSubmit }: RSVPCardProps) {
+export default function RSVPCard({ className = "", state = "form", response, onSubmit, demo = false }: RSVPCardProps) {
     const groupId = useId();
     const [name, setName] = useState("");
     const [status, setStatus] = useState<"yes" | "no">("yes");
@@ -48,10 +49,10 @@ export default function RSVPCard({ className = "", state = "form", response, onS
     }
     return (<section className={`flex w-full flex-col gap-stack-lg rounded-card bg-surface-default px-page-horizontal py-stack-lg ${className}`}>
       {done ? <>
-        <div className="flex flex-col items-center gap-stack-sm py-section-lg text-center">
+        <div role="status" className="flex flex-col items-center gap-stack-sm py-section-lg text-center">
           <SuccessIcon />
-          <h3 className="text-title-lg text-text-strong">참석 여부를 보냈어요</h3>
-          <p className="text-body-md text-text-secondary">호스트에게 응답이 전달됐어요.</p>
+          <h3 className="text-title-lg text-text-strong">{demo ? "참석 신청을 완료했어요" : "참석 여부를 보냈어요"}</h3>
+          <p className="text-body-md text-text-secondary">{demo ? "실습용으로 응답을 확인했어요." : "호스트에게 응답이 전달됐어요."}</p>
         </div>
         <div className="space-y-inline-md rounded-card bg-surface-subtle p-stack-md">
           <InfoRow type="spread" label="이름" value={result.name}/>

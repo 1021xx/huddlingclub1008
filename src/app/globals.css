@@ -13,6 +13,7 @@
   --spacing-stat-card: 107px;
   --spacing-image-character: 201px;
   --spacing-invitation: 375px;
+  --spacing-create-preview: 516px;
   --spacing-textarea-short: 72px;
   --spacing-textarea-long: 120px;
   --radius-image-flag: 16.799999237060547px;
@@ -278,6 +279,7 @@
 @utility text-nav-preserved { font-size: var(--text-heading-md); font-weight: 600; line-height: 1.4; letter-spacing: var(--tracking-preserved-nav); }
 @utility text-detail-preserved { font-size: var(--text-body-md); font-weight: 500; line-height: 1.4; letter-spacing: var(--tracking-preserved-detail); }
 @utility text-caption-preserved { font-size: var(--text-caption-md); font-weight: 600; line-height: 1.5; letter-spacing: var(--tracking-preserved-caption); }
+@utility text-invitation-body { font-size: var(--text-body-compact); font-weight: 400; line-height: 1.4; letter-spacing: var(--tracking-preserved-nav); }
 @utility component-focus { outline: var(--spacing-inline-xs) solid var(--color-border-accent); outline-offset: var(--spacing-inline-xs); }
 @utility radio-control {
   appearance: none;
@@ -289,6 +291,14 @@
   &:checked { border-width: var(--spacing-inline-compact); border-color: var(--color-action-primary); }
   &:disabled { border-color: var(--color-text-disabled); }
   &:focus-visible { outline: var(--spacing-inline-xs) solid var(--color-border-accent); outline-offset: var(--spacing-inline-xs); }
+}
+
+@utility create-content {
+  padding-bottom: calc(var(--spacing-button-lg) + var(--spacing-page-horizontal) * 2 + var(--spacing-stack-lg) + env(safe-area-inset-bottom));
+}
+
+@utility create-footer {
+  padding-bottom: calc(var(--spacing-page-horizontal) + env(safe-area-inset-bottom));
 }
 
 @layer base {
