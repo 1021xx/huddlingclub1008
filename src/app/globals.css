@@ -1,0 +1,300 @@
+@import "tailwindcss";
+
+/* Figma sYPmFZYYP1gThS3JFE0kO7 / 2168:193
+ * /를 -로 변환. 간격과 모서리는 Figma 숫자를 px로 유지합니다. */
+@theme static {
+  /* Components: Figma 고정 치수와 보존된 텍스트 스타일 */
+  --border-width-default: 1px;
+  --spacing-hairline: 1px;
+  --spacing-field: 45px;
+  --spacing-step-button: 44px;
+  --spacing-nav-bar: 65px;
+  --spacing-response-row: 78px;
+  --spacing-stat-card: 107px;
+  --spacing-image-character: 201px;
+  --spacing-invitation: 375px;
+  --spacing-textarea-short: 72px;
+  --spacing-textarea-long: 120px;
+  --radius-image-flag: 16.799999237060547px;
+  --color-cover-start: #050510;
+  --color-cover-end: #656f79;
+  --opacity-cover-subtitle: 0.6;
+  --tracking-preserved-tight: -0.16px;
+  --tracking-preserved-nav: -1px;
+  --tracking-preserved-subtitle: -0.42px;
+  --tracking-preserved-title: -0.5px;
+  --tracking-preserved-detail: -0.28px;
+  --tracking-preserved-caption: -0.12px;
+  --font-sans: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --color-guide-text-preserved-7: #6b7380;
+  --text-caption-md: 12px;
+  --spacing-none: 0px;
+  --spacing-section: 32px;
+  --radius-none: 0px;
+  --color-surface-default: #ffffff;
+  --color-guide-surface-preserved-8: #e5e8ed;
+  --color-guide-text-preserved-9: #111827;
+  --text-preserved-36: 36px;
+  --text-heading-md: 18px;
+  --spacing-stack-md: 16px;
+  --spacing-guide-inset: 64px;
+  --spacing-guide-group: 56px;
+  --text-preserved-13: 13px;
+  --spacing-stack-sm: 12px;
+  --text-preserved-11: 11px;
+  --radius-guide-chip: 10px;
+  --color-info-soft: #74aafb;
+  --spacing-inline-xs: 2px;
+  --spacing-control-x: 12px;
+  --spacing-control-compact: 10px;
+  --radius-media: 12px;
+  --color-info-subtle: #dceafe;
+  --color-action-secondary: #297eff;
+  --color-border-accent: #1f3dbc;
+  --color-info-strong: #00378a;
+  --color-action-primary: #536dfe;
+  --color-surface-subtle: #f3f4f6;
+  --color-text-strong: #000000;
+  --color-border-subtle: #e7e7e8;
+  --color-border-default: #e5e7eb;
+  --color-background-subtle: #f9fafb;
+  --color-text-disabled: #a0a2a3;
+  --color-text-tertiary: #66707a;
+  --color-text-secondary: #6b7280;
+  --color-preview-neutral-800: #5e5e5e;
+  --color-surface-inverse: #1f2937;
+  --color-text-primary: #131313;
+  --color-text-inverse: #ffffff;
+  --color-feedback-error: #d90000;
+  --color-border-on-dark: #ffffff33;
+  --radius-guide-panel: 16px;
+  --color-guide-surface-preserved-10: #f6f7fa;
+  --color-guide-text-preserved-6: #d90000;
+  --color-guide-text-preserved-1: #131313;
+  --color-action-hover-overlay: #1f3dbcb2;
+  --color-guide-border-preserved-11: #e5e8ed;
+  --color-guide-text-preserved-12: #6b7380;
+  --radius-guide-card: 24px;
+  --color-guide-surface-preserved-13: #e8edff;
+  --spacing-inline-sm: 4px;
+  --spacing-compact-detail: 5px;
+  --spacing-inline-compact: 6px;
+  --spacing-inline-md: 8px;
+  --spacing-control-y: 8px;
+  /* Figma 버튼 프레임의 고정 높이 */
+  --spacing-button-md: 48px;
+  --spacing-button-lg: 52px;
+  --spacing-page-horizontal: 20px;
+  --spacing-stack-lg: 24px;
+  --spacing-stack-xl: 28px;
+  --spacing-section-lg: 40px;
+  --spacing-section-xl: 60px;
+  --spacing-cover-inset: 80px;
+  --spacing-guide-section: 120px;
+  --radius-button: 6px;
+  --radius-control: 8px;
+  --radius-card: 20px;
+  --radius-pill: 999px;
+  --spacing-guide-row: 14px;
+  --spacing-preview-body-compact: 15px;
+  --spacing-preview-heading: 18px;
+  --spacing-preview-title: 25px;
+  --spacing-preview-display: 26px;
+  --text-display-lg: 26px;
+  --text-title-lg: 25px;
+  --text-heading-lg: 20px;
+  --text-body-lg: 16px;
+  --text-label-lg: 16px;
+  --text-body-compact: 15px;
+  --text-body-md: 14px;
+  --text-label-md: 14px;
+  --radius-cover: 32px;
+  --typography-shared-font-style-medium: Medium;
+  --typography-documentation-font-family: "Inter";
+  --typography-shared-font-style-regular: Regular;
+  --typography-letter-spacing-0: 0;
+  --typography-display-lg-font-style: "ExtraBold";
+  --typography-display-lg-font-family: "Pretendard Variable";
+  --typography-title-lg-font-style: "SemiBold";
+  --typography-title-lg-font-family: "Pretendard Variable";
+  --typography-heading-lg-font-style: "Bold";
+  --typography-heading-lg-font-family: "Pretendard Variable";
+  --typography-heading-md-font-style: "SemiBold";
+  --typography-heading-md-font-family: "Pretendard Variable";
+  --typography-body-lg-font-style: "Regular";
+  --typography-body-lg-font-family: "Pretendard Variable";
+  --typography-label-lg-font-style: "SemiBold";
+  --typography-label-lg-font-family: "Pretendard Variable";
+  --typography-body-compact-font-style: "Regular";
+  --typography-body-compact-font-family: "Pretendard Variable";
+  --typography-body-md-font-style: "Regular";
+  --typography-body-md-font-family: "Pretendard Variable";
+  --typography-label-md-font-style: "Medium";
+  --typography-label-md-font-family: "Pretendard Variable";
+  --typography-caption-md-font-style: "Regular";
+  --typography-caption-md-font-family: "Pretendard Variable";
+  --color-background: var(--color-surface-default);
+  --color-foreground: var(--color-text-primary);
+}
+
+/* 텍스트 스타일은 크기·굵기·행간·자간을 묶고 Pretendard를 상속합니다. */
+@utility text-documentation-medium-12-11 {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.45;
+  letter-spacing: 0px;
+}
+
+@utility text-documentation-regular-12-12 {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.45;
+  letter-spacing: 0px;
+}
+
+@utility text-documentation-medium-36-13 {
+  font-size: 36px;
+  font-weight: 500;
+  line-height: 1.45;
+  letter-spacing: 0px;
+}
+
+@utility text-documentation-regular-18-14 {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.45;
+  letter-spacing: 0px;
+}
+
+@utility text-documentation-medium-18-15 {
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.45;
+  letter-spacing: 0px;
+}
+
+@utility text-documentation-regular-13-16 {
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.45;
+  letter-spacing: 0px;
+}
+
+@utility text-documentation-medium-11-17 {
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.45;
+  letter-spacing: 4px;
+}
+
+@utility text-documentation-regular-11-18 {
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 1.45;
+  letter-spacing: 0px;
+}
+
+@utility text-display-lg {
+  font-size: 26px;
+  font-weight: 800;
+  line-height: 1.4;
+  letter-spacing: 0px;
+}
+
+@utility text-title-lg {
+  font-size: 25px;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: 0px;
+}
+
+@utility text-heading-lg {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.4;
+  letter-spacing: 0px;
+}
+
+@utility text-heading-md {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: 0px;
+}
+
+@utility text-body-lg {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0px;
+}
+
+@utility text-label-lg {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: 0px;
+}
+
+@utility text-body-compact {
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0px;
+}
+
+@utility text-body-md {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0px;
+}
+
+@utility text-label-md {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: 0px;
+}
+
+@utility text-caption-md {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0px;
+}
+
+/* Figma의 반투명 hover 색을 각 버튼 배경 위에 합성합니다. */
+@utility button-hover {
+  background-image: linear-gradient(var(--color-action-hover-overlay), var(--color-action-hover-overlay));
+}
+
+@utility text-input-preserved { font-size: var(--text-body-lg); font-weight: 400; line-height: normal; letter-spacing: var(--tracking-preserved-tight); }
+@utility text-label-preserved { font-size: var(--text-label-lg); font-weight: 600; line-height: normal; letter-spacing: var(--tracking-preserved-tight); }
+@utility text-required-preserved { font-size: var(--text-caption-md); font-weight: 400; line-height: normal; letter-spacing: var(--tracking-preserved-tight); }
+@utility text-subtitle-preserved { font-size: var(--text-body-md); font-weight: 500; line-height: 1.4; letter-spacing: var(--tracking-preserved-subtitle); }
+@utility text-title-preserved { font-size: var(--text-title-lg); font-weight: 600; line-height: 1.4; letter-spacing: var(--tracking-preserved-title); }
+@utility text-description-preserved { font-size: var(--text-body-md); font-weight: 400; line-height: 1.4; letter-spacing: var(--tracking-preserved-nav); }
+@utility text-nav-preserved { font-size: var(--text-heading-md); font-weight: 600; line-height: 1.4; letter-spacing: var(--tracking-preserved-nav); }
+@utility text-detail-preserved { font-size: var(--text-body-md); font-weight: 500; line-height: 1.4; letter-spacing: var(--tracking-preserved-detail); }
+@utility text-caption-preserved { font-size: var(--text-caption-md); font-weight: 600; line-height: 1.5; letter-spacing: var(--tracking-preserved-caption); }
+@utility component-focus { outline: var(--spacing-inline-xs) solid var(--color-border-accent); outline-offset: var(--spacing-inline-xs); }
+@utility radio-control {
+  appearance: none;
+  width: var(--spacing-page-horizontal);
+  height: var(--spacing-page-horizontal);
+  border-radius: var(--radius-pill);
+  border: var(--spacing-inline-xs) solid var(--color-text-tertiary);
+  background: var(--color-surface-default);
+  &:checked { border-width: var(--spacing-inline-compact); border-color: var(--color-action-primary); }
+  &:disabled { border-color: var(--color-text-disabled); }
+  &:focus-visible { outline: var(--spacing-inline-xs) solid var(--color-border-accent); outline-offset: var(--spacing-inline-xs); }
+}
+
+@layer base {
+  body {
+    background: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+  }
+}
