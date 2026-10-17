@@ -1,0 +1,389 @@
+@import "tailwindcss" source("../");
+
+/* Figma sYPmFZYYP1gThS3JFE0kO7 / 2168:193
+ * /를 -로 변환. 간격과 모서리는 Figma 숫자를 px로 유지합니다. */
+@theme static {
+  --color-party-ghost: #c8a0ff;
+  --aspect-party-photo: 1.22;
+  /* Components: Figma 고정 치수와 보존된 텍스트 스타일 */
+  --border-width-default: 1px;
+  --spacing-hairline: 1px;
+  --spacing-field: 45px;
+  --spacing-step-button: 44px;
+  --spacing-nav-bar: 65px;
+  --spacing-response-row: 78px;
+  --spacing-stat-card: 107px;
+  --spacing-image-character: 201px;
+  --spacing-invitation: 375px;
+  --spacing-create-preview: 516px;
+  --spacing-textarea-short: 72px;
+  --spacing-textarea-long: 120px;
+  --radius-image-flag: 16.799999237060547px;
+  --color-cover-start: #121016;
+  --color-cover-end: #23162e;
+  --opacity-cover-subtitle: 0.6;
+  --tracking-preserved-tight: -0.16px;
+  --tracking-preserved-nav: -1px;
+  --tracking-preserved-subtitle: -0.42px;
+  --tracking-preserved-title: -0.5px;
+  --tracking-preserved-detail: -0.28px;
+  --tracking-preserved-caption: -0.12px;
+  --font-sans: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --color-guide-text-preserved-7: #a99ab8;
+  --text-caption-md: 12px;
+  --spacing-none: 0px;
+  --spacing-section: 32px;
+  --radius-none: 0px;
+  --color-surface-default: #16121d;
+  --color-guide-surface-preserved-8: #33273f;
+  --color-guide-text-preserved-9: #f3ecfa;
+  --text-preserved-36: 36px;
+  --text-heading-md: 18px;
+  --spacing-stack-md: 16px;
+  --spacing-guide-inset: 64px;
+  --spacing-guide-group: 56px;
+  --text-preserved-13: 13px;
+  --spacing-stack-sm: 12px;
+  --text-preserved-11: 11px;
+  --radius-guide-chip: 10px;
+  --color-info-soft: #c098f4;
+  --spacing-inline-xs: 2px;
+  --spacing-control-x: 12px;
+  --spacing-control-compact: 10px;
+  --radius-media: 12px;
+  --color-info-subtle: #35213e;
+  --color-action-secondary: #c29aff;
+  --color-border-accent: #b58aff;
+  --color-info-strong: #f8b074;
+  --color-action-primary: #ff852f;
+  --color-surface-subtle: #211b2c;
+  --color-text-strong: #fff4e8;
+  --color-border-subtle: #382c44;
+  --color-border-default: #40304e;
+  --color-background-subtle: #100d16;
+  --color-text-disabled: #776984;
+  --color-text-tertiary: #a99ab8;
+  --color-text-secondary: #bcb0c9;
+  --color-preview-neutral-800: #5e5e5e;
+  --color-surface-inverse: #08060b;
+  --color-text-primary: #f3ecfa;
+  --color-text-inverse: #ffffff;
+  --color-feedback-error: #ff928a;
+  --color-border-on-dark: #ffffff33;
+  --radius-guide-panel: 16px;
+  --color-guide-surface-preserved-10: #211b2c;
+  --color-guide-text-preserved-6: #d90000;
+  --color-guide-text-preserved-1: #f3ecfa;
+  --color-action-hover-overlay: #8e3c1728;
+  --color-guide-border-preserved-11: #40304e;
+  --color-guide-text-preserved-12: #a99ab8;
+  --radius-guide-card: 24px;
+  --color-guide-surface-preserved-13: #35213e;
+  --spacing-inline-sm: 4px;
+  --spacing-compact-detail: 5px;
+  --spacing-inline-compact: 6px;
+  --spacing-inline-md: 8px;
+  --spacing-control-y: 8px;
+  /* Figma 버튼 프레임의 고정 높이 */
+  --spacing-button-md: 48px;
+  --spacing-button-lg: 52px;
+  --spacing-page-horizontal: 20px;
+  --spacing-stack-lg: 24px;
+  --spacing-stack-xl: 28px;
+  --spacing-section-lg: 40px;
+  --spacing-section-xl: 60px;
+  --spacing-cover-inset: 80px;
+  --spacing-guide-section: 120px;
+  --radius-button: 6px;
+  --radius-control: 8px;
+  --radius-card: 20px;
+  --radius-pill: 999px;
+  --spacing-guide-row: 14px;
+  --spacing-preview-body-compact: 15px;
+  --spacing-preview-heading: 18px;
+  --spacing-preview-title: 25px;
+  --spacing-preview-display: 26px;
+  --text-display-lg: 26px;
+  --text-title-lg: 25px;
+  --text-heading-lg: 20px;
+  --text-body-lg: 16px;
+  --text-label-lg: 16px;
+  --text-body-compact: 15px;
+  --text-body-md: 14px;
+  --text-label-md: 14px;
+  --radius-cover: 32px;
+  --typography-shared-font-style-medium: Medium;
+  --typography-documentation-font-family: "Inter";
+  --typography-shared-font-style-regular: Regular;
+  --typography-letter-spacing-0: 0;
+  --typography-display-lg-font-style: "ExtraBold";
+  --typography-display-lg-font-family: "Pretendard Variable";
+  --typography-title-lg-font-style: "SemiBold";
+  --typography-title-lg-font-family: "Pretendard Variable";
+  --typography-heading-lg-font-style: "Bold";
+  --typography-heading-lg-font-family: "Pretendard Variable";
+  --typography-heading-md-font-style: "SemiBold";
+  --typography-heading-md-font-family: "Pretendard Variable";
+  --typography-body-lg-font-style: "Regular";
+  --typography-body-lg-font-family: "Pretendard Variable";
+  --typography-label-lg-font-style: "SemiBold";
+  --typography-label-lg-font-family: "Pretendard Variable";
+  --typography-body-compact-font-style: "Regular";
+  --typography-body-compact-font-family: "Pretendard Variable";
+  --typography-body-md-font-style: "Regular";
+  --typography-body-md-font-family: "Pretendard Variable";
+  --typography-label-md-font-style: "Medium";
+  --typography-label-md-font-family: "Pretendard Variable";
+  --typography-caption-md-font-style: "Regular";
+  --typography-caption-md-font-family: "Pretendard Variable";
+  --color-background: var(--color-surface-default);
+  --color-foreground: var(--color-text-primary);
+}
+
+/* 텍스트 스타일은 크기·굵기·행간·자간을 묶고 Pretendard를 상속합니다. */
+@utility text-documentation-medium-12-11 {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.45;
+  letter-spacing: 0px;
+}
+
+@utility text-documentation-regular-12-12 {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.45;
+  letter-spacing: 0px;
+}
+
+@utility text-documentation-medium-36-13 {
+  font-size: 36px;
+  font-weight: 500;
+  line-height: 1.45;
+  letter-spacing: 0px;
+}
+
+@utility text-documentation-regular-18-14 {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.45;
+  letter-spacing: 0px;
+}
+
+@utility text-documentation-medium-18-15 {
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.45;
+  letter-spacing: 0px;
+}
+
+@utility text-documentation-regular-13-16 {
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.45;
+  letter-spacing: 0px;
+}
+
+@utility text-documentation-medium-11-17 {
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.45;
+  letter-spacing: 4px;
+}
+
+@utility text-documentation-regular-11-18 {
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 1.45;
+  letter-spacing: 0px;
+}
+
+@utility text-display-lg {
+  font-size: 26px;
+  font-weight: 800;
+  line-height: 1.4;
+  letter-spacing: 0px;
+}
+
+@utility text-title-lg {
+  font-size: 25px;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: 0px;
+}
+
+@utility text-heading-lg {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.4;
+  letter-spacing: 0px;
+}
+
+@utility text-heading-md {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: 0px;
+}
+
+@utility text-body-lg {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0px;
+}
+
+@utility text-label-lg {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: 0px;
+}
+
+@utility text-body-compact {
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0px;
+}
+
+@utility text-body-md {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0px;
+}
+
+@utility text-label-md {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: 0px;
+}
+
+@utility text-caption-md {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0px;
+}
+
+/* Figma의 반투명 hover 색을 각 버튼 배경 위에 합성합니다. */
+@utility button-hover {
+  background-image: linear-gradient(var(--color-action-hover-overlay), var(--color-action-hover-overlay));
+}
+
+@utility text-input-preserved { font-size: var(--text-body-lg); font-weight: 400; line-height: normal; letter-spacing: var(--tracking-preserved-tight); }
+@utility text-label-preserved { font-size: var(--text-label-lg); font-weight: 600; line-height: normal; letter-spacing: var(--tracking-preserved-tight); }
+@utility text-required-preserved { font-size: var(--text-caption-md); font-weight: 400; line-height: normal; letter-spacing: var(--tracking-preserved-tight); }
+@utility text-subtitle-preserved { font-size: var(--text-body-md); font-weight: 500; line-height: 1.4; letter-spacing: var(--tracking-preserved-subtitle); }
+@utility text-title-preserved { font-size: var(--text-title-lg); font-weight: 600; line-height: 1.4; letter-spacing: var(--tracking-preserved-title); }
+@utility text-description-preserved { font-size: var(--text-body-md); font-weight: 400; line-height: 1.4; letter-spacing: var(--tracking-preserved-nav); }
+@utility text-nav-preserved { font-size: var(--text-heading-md); font-weight: 600; line-height: 1.4; letter-spacing: var(--tracking-preserved-nav); }
+@utility text-detail-preserved { font-size: var(--text-body-md); font-weight: 500; line-height: 1.4; letter-spacing: var(--tracking-preserved-detail); }
+@utility text-caption-preserved { font-size: var(--text-caption-md); font-weight: 600; line-height: 1.5; letter-spacing: var(--tracking-preserved-caption); }
+@utility text-invitation-body { font-size: var(--text-body-compact); font-weight: 400; line-height: 1.4; letter-spacing: var(--tracking-preserved-nav); }
+@utility component-focus { outline: var(--spacing-inline-xs) solid var(--color-border-accent); outline-offset: var(--spacing-inline-xs); }
+@utility radio-control {
+  appearance: none;
+  width: var(--spacing-page-horizontal);
+  height: var(--spacing-page-horizontal);
+  border-radius: var(--radius-pill);
+  border: var(--spacing-inline-xs) solid var(--color-text-tertiary);
+  background: var(--color-surface-default);
+  &:checked { border-width: var(--spacing-inline-compact); border-color: var(--color-action-primary); }
+  &:disabled { border-color: var(--color-text-disabled); }
+  &:focus-visible { outline: var(--spacing-inline-xs) solid var(--color-border-accent); outline-offset: var(--spacing-inline-xs); }
+}
+
+@utility create-content {
+  padding-bottom: calc(var(--spacing-button-lg) + var(--spacing-page-horizontal) * 2 + var(--spacing-stack-lg) + env(safe-area-inset-bottom));
+}
+
+@utility create-footer {
+  padding-bottom: calc(var(--spacing-page-horizontal) + env(safe-area-inset-bottom));
+}
+
+@layer base {
+  body {
+    background: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+  }
+}
+
+/* Halloween edition — original layout and spacing tokens are preserved. */
+:root { color-scheme: dark; }
+body {
+  background: #0b080f;
+  background-image: radial-gradient(ellipse at 15% 10%, #55217226, transparent 48%), radial-gradient(ellipse at 95% 60%, #a64c1320, transparent 45%);
+  background-attachment: fixed;
+}
+body > main { box-shadow: 0 0 100px #0005; }
+::selection { background: #a26aff; color: #fff; }
+input, textarea { transition: border-color .2s, box-shadow .2s; }
+input:focus, textarea:focus { box-shadow: 0 0 0 3px #a26aff20; }
+input::placeholder, textarea::placeholder { color: #8e809d; }
+.party-button { transition: transform .2s, box-shadow .2s, background-color .2s; font-weight: 700; }
+.party-button.bg-action-primary { color: #211007; box-shadow: 0 4px 24px #ff852f18; }
+.party-button:enabled:hover { transform: translateY(-2px); box-shadow: 0 6px 28px #ff852f30; }
+.party-button:disabled { color: #a596af; box-shadow: none; }
+.halloween-cover { padding-top: 24px; padding-bottom: 32px; background: #16121d; }
+.party-edition { display: flex; align-items: center; gap: var(--spacing-inline-compact); width: 100%; color: var(--color-text-secondary); }
+.party-edition > span:first-child { width: var(--spacing-inline-compact); height: var(--spacing-inline-compact); flex-shrink: 0; border-radius: var(--radius-pill); background: var(--color-action-primary); }
+.party-edition-date { flex: 1; min-width: 0; overflow-wrap: anywhere; }
+.party-edition > span:last-child { margin-left: auto; flex-shrink: 0; white-space: nowrap; }
+.party-eyebrow { margin: 35px 0 16px; color: #c5a1ed; font-size: 9px; font-weight: 600; letter-spacing: 2px; }
+.party-wordmark { font-family: Impact, "Arial Black", sans-serif; font-size: 56px; font-weight: 900; line-height: .98; letter-spacing: -2px; color: #fff0dc; text-align: center; }
+.party-wordmark > span { color: #ff852f; }
+.party-title { font-size: 20px; font-weight: 700; line-height: 1.5; text-align: center; white-space: pre-line; overflow-wrap: anywhere; margin: 18px 0 26px; }
+.party-photo { position: relative; isolation: isolate; width: 100%; aspect-ratio: var(--aspect-party-photo); border: 1px solid #5d3a62; border-radius: 120px 120px 16px 16px; }
+.party-photo > img { width: 100%; height: 100%; object-fit: cover; border-radius: inherit; filter: saturate(.85); }
+.party-photo-sticker { position: absolute; bottom: 20px; right: 12px; display: grid; place-content: center; width: 75px; height: 75px; border-radius: 50%; background: #b58aff; color: #241334; font-size: 11px; font-weight: 900; line-height: 1.3; text-align: center; transform: rotate(14deg); box-shadow: 0 4px 16px #0005; }
+@property --beam-angle { syntax: "<angle>"; initial-value: 0deg; inherits: false; }
+.border-beam { position: absolute; inset: -1px; border-radius: inherit; overflow: hidden; pointer-events: none; }
+.border-beam > span {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 2px;
+  background: conic-gradient(from var(--beam-angle), transparent 0deg 285deg, #b58aff 325deg, #ffbe78 350deg, transparent 360deg);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  animation: border-beam-travel 8s linear infinite reverse;
+}
+@keyframes border-beam-travel { to { --beam-angle: 360deg; } }
+.party-mascots { display: flex; align-items: center; justify-content: space-between; width: 100%; margin: -10px 0 12px; z-index: 1; }
+.party-mascots > span { color: #d5c3e3; font-size: 12px; line-height: 1.7; text-align: right; padding-right: 8px; }
+.party-bots { display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.party-bots > :last-child:not(:first-child) { margin-left: -25px; }
+.party-bots--compact { height: 76px; }
+.party-ticket { width: 100%; border: 1px solid #493349; border-radius: 12px; padding: 18px; background: #201826; }
+.party-ticket > div { display: flex; flex-direction: column; gap: 6px; }
+.party-ticket > div + div { margin-top: 16px; padding-top: 16px; border-top: 1px dashed #4d3a53; }
+.party-ticket span { color: #d4a7ff; font-size: 9px; font-weight: 700; letter-spacing: 2px; }
+.party-ticket p { font-size: 13px; color: #f6e8dc; overflow-wrap: anywhere; }
+.party-cover-foot { margin-top: 24px; font-size: 8px; letter-spacing: 1px; color: #a994b9; text-align: center; }
+.party-spark { display: block; color: #b58aff; font-size: 42px; line-height: 1; }
+.party-form-intro { padding: 16px 0 0; }
+.party-form-intro > span { color: #b58aff; font-size: 10px; letter-spacing: 1.7px; }
+.party-form-intro h1 { color: #fff0dc; font-size: 25px; font-weight: 800; margin: 10px 0 6px; }
+.party-form-intro p { color: #bcb0c9; font-size: 13px; }
+.party-confetti { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 50; }
+.party-site-nav { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 18px 20px; border-bottom: 1px solid #302338; font-size: 10px; letter-spacing: 1.2px; }
+.party-site-nav > a:first-child { color: #ffad72; font-weight: 800; }
+.party-site-nav > a:last-child { color: #c7abdf; font-size: 11px; letter-spacing: 0; }
+.party-footer { padding: 25px 20px 32px; text-align: center; border-top: 1px solid #302338; }
+.party-footer p { color: #a18baf; font-size: 9px; letter-spacing: 2px; margin-bottom: 16px; }
+.party-footer div { display: flex; justify-content: center; gap: 24px; }
+.party-footer a { color: #cab4dc; font-size: 12px; text-underline-offset: 4px; }
+.party-footer a:hover, .party-site-nav a:hover { color: #ffad72; text-decoration: underline; }
+@media (max-width: 359px) {
+  .party-wordmark { font-size: 48px; }
+  .party-mascots > span { font-size: 11px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+  .border-beam { display: none; }
+}
