@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "@/components/Image";
 import InfoRow from "@/components/InfoRow";
 import InvitationCover from "@/components/InvitationCover";
-import { getMockInvitation } from "@/lib/mock";
+import { getInvitation } from "@/lib/supabase";
 import { notFound } from "next/navigation";
 import AttendanceForm from "./AttendanceForm";
 
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 
 export default async function InvitationPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
-  const invitation = getMockInvitation(id);
+  const invitation = await getInvitation(id);
   if (!invitation) notFound();
   const { title, date, location, body } = invitation;
 
@@ -39,7 +39,7 @@ export default async function InvitationPage({ params }: { params: Promise<{ id:
         </div>
       </section>
       <section aria-label="참석 신청" className="bg-background-subtle px-page-horizontal pb-section-xl pt-section-lg">
-        <AttendanceForm />
+        <AttendanceForm invitationId={id} />
       </section>
       <footer className="party-footer"><p>A LITTLE SPOOKY. A LOT OF FUN.</p><div><Link href="/create">초대장 만들기</Link><Link href={`/i/${id}/responses`}>응답 현황 보기 ↗</Link></div></footer>
     </main>

@@ -22,23 +22,44 @@ export default function CreateScreen() {
   const [date, setDate] = useState("");
   const [location, setLocation] = useState("");
   const [body, setBody] = useState("");
-  const [publishedPreview, setPublishedPreview] = useState(false);
+  const [publishedId, setPublishedId] = useState("");
+  const [pending, setPending] = useState(false);
+  const [error, setError] = useState("");
   const [publishedOrigin, setPublishedOrigin] = useState("");
   const titleTooLong = title.split("\n").length > 2;
   const canPublish = [title, date, location, body].every(value => value.trim()) && !titleTooLong;
 
-  function publish(event: FormEvent<HTMLFormElement>) {
+  async function publish(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (!canPublish) return;
-    setPublishedOrigin(window.location.origin);
-    setPublishedPreview(true);
-    window.scrollTo({ top: 0 });
+    if (!canPublish || pending) return;
+    setPending(true);
+    setError("");
+    try {
+      const response = await fetch("/api/invitations", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ title, date, location, body }),
+      });
+      const result = await response.json();
+      if (!response.ok) {
+        setError(result.error || "초대장을 발행하지 못했어요. 다시 시도해 주세요.");
+        return;
+      }
+      if (typeof result.invitation?.id !== "string") throw new Error("Invalid response");
+      setPublishedOrigin(window.location.origin);
+      setPublishedId(result.invitation.id);
+      window.scrollTo({ top: 0 });
+    } catch {
+      setError("초대장을 발행하지 못했어요. 연결을 확인하고 다시 시도해 주세요.");
+    } finally {
+      setPending(false);
+    }
   }
 
-  if (publishedPreview) {
+  if (publishedId) {
     return (
       <main className="mx-auto min-h-dvh w-full max-w-invitation bg-surface-default">
-        <NavBar title="발행 완료 · 실습용" />
+        <NavBar title="발행 완료" />
         <PartyConfetti />
         <div className="flex flex-col gap-section-lg px-page-horizontal pb-cover-inset">
           <div className="flex flex-col items-center gap-stack-sm py-section-lg text-center">
@@ -50,14 +71,14 @@ export default function CreateScreen() {
               description="아래 두 링크를 복사해 두세요."
             />
           </div>
-          <CopyLinkField title="초대장 링크" url={`${publishedOrigin}/i/demo`} description="게스트에게 공유하는 실습용 초대장 링크예요." />
-          <CopyLinkField title="응답 현황 링크" url={`${publishedOrigin}/i/demo/responses`} description="실습용 응답 현황을 확인하는 링크예요." />
+          <CopyLinkField title="초대장 링크" url={`${publishedOrigin}/i/${publishedId}`} description="게스트에게 공유하는 초대장 링크예요." />
+          <CopyLinkField title="응답 현황 링크" url={`${publishedOrigin}/i/${publishedId}/responses`} description="참석 응답 현황을 확인하는 링크예요." />
           <Button
             size="lg"
             className="w-full"
-            onClick={() => router.push("/i/demo")}
+            onClick={() => router.push(`/i/${publishedId}`)}
           >내 초대장 보기</Button>
-          <p className="text-caption-md text-text-tertiary">실습용 화면 연결입니다. 링크에서는 기존 demo 데이터를 보여주며, 방금 입력한 내용은 저장되지 않아요.</p>
+          <p className="text-caption-md text-text-tertiary">초대장이 저장됐어요. 링크로 언제든 다시 확인할 수 있어요.</p>
         </div>
       </main>
     );
@@ -66,12 +87,13 @@ export default function CreateScreen() {
   return (
     <main className="mx-auto min-h-dvh w-full max-w-invitation bg-surface-default">
       <NavBar title="초대장 만들기" />
-      <form id="create-invitation" onSubmit={publish} className="create-content space-y-section-lg px-page-horizontal pt-control-compact">
+      <form id="create-invitation" onSubmit={publish} aria-busy={pending} className="create-content space-y-section-lg px-page-horizontal pt-control-compact">
         <div className="party-form-intro"><span>MAKE A LITTLE MAGIC</span><h1>수상한 밤의 초대장</h1><p>우리만의 할로윈 파티를 시작해요.</p></div>
-        <div className="space-y-stack-lg">
+        <fieldset disabled={pending} className="space-y-stack-lg">
           <Textarea
             label="제목"
             name="title"
+            maxLength={200}
             rows={2}
             placeholder={"예) 허들링 클럽\n할로윈 파티"}
             helper={titleTooLong ? "제목은 최대 2줄로 입력해 주세요." : "엔터로 줄을 나눌 수 있어요 · 최대 2줄"}
@@ -80,10 +102,11 @@ export default function CreateScreen() {
             aria-invalid={titleTooLong}
             onChange={event => setTitle(event.target.value)}
           />
-          <Input label="일시" name="date" placeholder="예) 2026년 10월 31일 (토) 19:00" value={date} onChange={event => setDate(event.target.value)} />
-          <Input label="장소" name="location" placeholder="예) 허들링 아지트 · 서울" value={location} onChange={event => setLocation(event.target.value)} />
-          <Textarea label="본문" name="body" rows={4} value={body} onChange={event => setBody(event.target.value)} />
-        </div>
+          <Input label="일시" name="date" maxLength={200} placeholder="예) 2026년 10월 31일 (토) 19:00" value={date} onChange={event => setDate(event.target.value)} />
+          <Input label="장소" name="location" maxLength={500} placeholder="예) 허들링 아지트 · 서울" value={location} onChange={event => setLocation(event.target.value)} />
+          <Textarea label="본문" name="body" maxLength={10000} rows={4} value={body} onChange={event => setBody(event.target.value)} />
+        </fieldset>
+        {error && <p role="alert" className="text-caption-md text-feedback-error">{error}</p>}
 
         <section aria-labelledby="preview-label" className="flex h-create-preview min-h-none flex-col gap-inline-md">
           <Label id="preview-label" label="미리보기" required={false} />
@@ -114,7 +137,7 @@ export default function CreateScreen() {
       </form>
 
       <footer className="create-footer fixed bottom-0 left-1/2 z-10 w-full max-w-invitation -translate-x-1/2 bg-surface-default px-page-horizontal pt-page-horizontal">
-        <Button type="submit" form="create-invitation" size="lg" className="w-full" disabled={!canPublish}>발행하기</Button>
+        <Button type="submit" form="create-invitation" size="lg" className="w-full" disabled={!canPublish || pending}>{pending ? "발행하는 중…" : "발행하기"}</Button>
       </footer>
     </main>
   );

@@ -7,12 +7,16 @@
 | /i/[id] | 초대장 보기 · 참석 신청 및 같은 자리의 완료 상태 | [2168:923](https://www.figma.com/design/sYPmFZYYP1gThS3JFE0kO7/?node-id=2168-923) |
 | /i/[id]/responses | 응답 현황 · 0건이면 EmptyState 표시 | [2168:871](https://www.figma.com/design/sYPmFZYYP1gThS3JFE0kO7/?node-id=2168-871) |
 
-현재 발행 완료는 같은 /create 화면 안의 실습용 상태 전환입니다.
-완료 화면에서 /i/demo와 /i/demo/responses의 전체 주소를 복사할 수 있고, ‘내 초대장 보기’로 /i/demo에 이동합니다.
-두 링크는 기존 mock 데이터를 표시하며, 만들기에서 입력한 내용은 저장되지 않습니다.
-입력값은 화면 전환 중 유지되며 페이지를 새로고침하면 초기화됩니다.
+`/`는 `/create`로 이동합니다. 발행하면 `POST /api/invitations`로 Supabase에
+초대장을 저장한 뒤, 같은 화면에서 발행 완료 상태를 표시합니다.
+완료 화면의 `/i/[id]`와 `/i/[id]/responses`는 DB에서 발급한 UUID를 사용합니다.
 
-`/i/demo`에서 `src/lib/mock.ts`의 초대장 데이터를 확인할 수 있습니다.
-`/i/demo`는 기존 초대장, `/i/empty`는 응답이 없는 초대장입니다. 그 외 ID는 404를 표시합니다.
-참석 응답은 현재 화면의 메모리에만 유지되며 응답 현황 가짜 데이터에는 추가되지 않습니다.
-`/i/demo/responses`에서 기존 응답 3개, `/i/empty/responses`에서 0건과 EmptyState를 확인할 수 있습니다.
+초대장 페이지는 Supabase의 `invitations`를 조회합니다. 존재하지 않는 UUID나
+과거 실습용 ID(`demo`, `empty`)는 404를 표시합니다.
+참석 응답은 `POST /api/invitations/[id]/rsvps`로 `rsvps`에 추가하고,
+저장 성공 후에만 완료 화면을 표시합니다. 새로고침해도 DB의 응답은 유지됩니다.
+응답 현황은 해당 초대장의 실제 응답을 읽어 통계를 계산하며, 응답이 없으면
+EmptyState를 표시합니다. 최신 응답은 페이지를 새로고침해서 확인합니다.
+
+입력 중인 미발행 내용은 브라우저 메모리에만 있으므로 새로고침하면 초기화됩니다.
+`src/lib/mock.ts`는 참고용으로 남아 있으며 서비스 데이터 조회에 사용하지 않습니다.

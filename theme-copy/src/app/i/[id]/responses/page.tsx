@@ -5,7 +5,7 @@ import NavBar from "@/components/NavBar";
 import SectionHeader from "@/components/SectionHeader";
 import StatCard from "@/components/StatCard";
 import ResponseRowTrue from "@/components/ResponseRow/true";
-import { getMockInvitation } from "@/lib/mock";
+import { getInvitationWithResponses } from "@/lib/supabase";
 import CopyInvitationButton from "./CopyInvitationButton";
 
 export const metadata: Metadata = {
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 
 export default async function ResponsesPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
-  const invitation = getMockInvitation(id);
+  const invitation = await getInvitationWithResponses(id);
   if (!invitation) notFound();
   const { responses } = invitation;
   const attending = responses.filter(response => response.status === "yes");
@@ -37,8 +37,8 @@ export default async function ResponsesPage({ params }: { params: Promise<{ id: 
           <h2 id="response-list-title" className="text-heading-md text-text-strong">응답 목록</h2>
           {responses.length === 0 ? <EmptyState /> : (
             <ul className="space-y-inline-md">
-              {responses.map((response, index) => (
-                <li key={index}>
+              {responses.map((response) => (
+                <li key={response.id}>
                   <ResponseRowTrue
                     name={response.name}
                     status={response.status}
@@ -50,7 +50,7 @@ export default async function ResponsesPage({ params }: { params: Promise<{ id: 
           )}
         </section>
         <CopyInvitationButton id={id} />
-        <p className="text-caption-md text-text-tertiary">실습용 가짜 데이터입니다. 실제 응답이나 호스트 인증과 연결되지 않아요.</p>
+        <p className="text-caption-md text-text-tertiary">저장된 참석 응답이에요. 새로고침하면 최신 현황을 확인할 수 있어요.</p>
       </div>
     </main>
   );

@@ -66,7 +66,7 @@ export default function RSVPCard({ className = "", state = "form", response, onS
         </header>
         <form onSubmit={submit} className="space-y-stack-lg">
           <fieldset disabled={pending} className="space-y-stack-lg">
-            <Input label="이름" placeholder="이름을 입력해주세요" value={name} onChange={event => setName(event.target.value)}/>
+            <Input label="이름" maxLength={100} placeholder="이름을 입력해주세요" value={name} onChange={event => setName(event.target.value)}/>
             <fieldset className="space-y-inline-md">
               <legend className="text-label-preserved text-text-strong">참석 여부 <span className="text-required-preserved text-feedback-error">필수</span></legend>
               <div className="flex">

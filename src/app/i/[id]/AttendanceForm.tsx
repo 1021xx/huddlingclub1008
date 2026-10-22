@@ -1,22 +1,16 @@
 "use client";
 
-import { useState } from "react";
 import RSVPCard, { type RSVPResponse } from "@/components/RSVPCard";
 
-export default function AttendanceForm() {
-  const [response, setResponse] = useState<RSVPResponse>();
+export default function AttendanceForm({ invitationId }: { invitationId: string }) {
+  async function submit(value: RSVPResponse) {
+    const response = await fetch(`/api/invitations/${invitationId}/rsvps`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(value),
+    });
+    if (!response.ok) throw new Error("참석 응답을 저장하지 못했어요.");
+  }
 
-  return (
-    <div className="space-y-stack-sm">
-      <RSVPCard
-        state={response ? "done" : "form"}
-        response={response}
-        onSubmit={value => setResponse(value)}
-        demo
-      />
-      <p className="text-center text-caption-md text-text-tertiary">
-        실습용 초대장이에요. 응답은 서버에 저장되지 않으며 새로고침하면 초기화돼요.
-      </p>
-    </div>
-  );
+  return <RSVPCard onSubmit={submit} />;
 }
