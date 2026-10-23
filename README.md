@@ -9,9 +9,9 @@ UI/UX 디자인부터 프론트엔드 구현, 인증과 데이터베이스 연�
 > 학습 및 기능 검증을 위한 프로토타입으로, 실제 상용 서비스가 아닙니다.
 
 ## 🔗 Demo
-할로윈 초대장 💌 (https://huddlingclub1008-pi.vercel.app/i/b34ba675-ec4c-4abd-be36-198265908b0d)
+할로윈 초대장 💌 https://huddlingclub1008-pi.vercel.app/i/b34ba675-ec4c-4abd-be36-198265908b0d
 
-[Huddling Club 미리보기](https://huddlingclub1008-pi.vercel.app)
+로그인페이지 https://huddlingclub1008-pi.vercel.app
 
 ## ✨ 주요 기능
 
