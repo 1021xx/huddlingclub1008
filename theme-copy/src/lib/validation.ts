@@ -44,5 +44,5 @@ export function parseRsvp(value: unknown): RsvpInput {
       || input.companions < 0 || input.companions > 2147483647) {
     throw new InputError("동반 인원은 0 이상의 정수로 입력해 주세요.");
   }
-  return { name, status: input.status, companions: input.companions };
+  return { name, status: input.status, companions: input.status === "no" ? 0 : input.companions };
 }

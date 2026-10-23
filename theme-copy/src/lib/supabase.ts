@@ -1,6 +1,7 @@
 import "server-only";
 import type { Invitation, InvitationInput, Rsvp, RsvpInput } from "./types";
 import { isInvitationId } from "./validation";
+import { createAuthClient, currentUser } from "./auth/server";
 
 class SupabaseError extends Error {
   constructor(readonly status: number, readonly code?: string) {
@@ -10,7 +11,7 @@ class SupabaseError extends Error {
 
 // Publishable key로 호출하므로 Supabase의 anon RLS 정책이 적용됩니다.
 // 서비스 역할 키를 사용하거나 수정·삭제 요청을 보내지 않습니다.
-async function request<T>(path: string, body?: unknown): Promise<T> {
+async function request<T>(path: string, body?: unknown, minimal = false): Promise<T> {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const key = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
   if (!url || !key) {
@@ -23,7 +24,7 @@ async function request<T>(path: string, body?: unknown): Promise<T> {
       apikey: key,
       ...(body === undefined ? {} : {
         "Content-Type": "application/json",
-        Prefer: "return=representation",
+        Prefer: minimal ? "return=minimal" : "return=representation",
       }),
     },
     ...(body === undefined ? {} : { body: JSON.stringify(body) }),
@@ -35,7 +36,7 @@ async function request<T>(path: string, body?: unknown): Promise<T> {
     const error = await response.json().catch(() => ({}));
     throw new SupabaseError(response.status, error.code);
   }
-  return response.json() as Promise<T>;
+  return minimal ? undefined as T : response.json() as Promise<T>;
 }
 
 const invitationColumns = "id,title,date,location,body";
@@ -50,14 +51,20 @@ export async function getInvitation(id: string): Promise<Invitation | null> {
 }
 
 export async function getInvitationWithResponses(id: string) {
-  const invitation = await getInvitation(id);
+  if (!isInvitationId(id)) return null;
+  const user = await currentUser();
+  if (!user) return null;
+  const client = await createAuthClient();
+  const { data: invitation, error } = await client.from("invitations")
+    .select(invitationColumns).eq("id", id).eq("host_id", user.id).maybeSingle();
+  if (error) throw new Error("초대장을 조회하지 못했습니다.");
   if (!invitation) return null;
   const responses: Rsvp[] = [];
   // Supabase의 기본 반환 제한 때문에 응답이 누락되지 않도록 페이지별 조회합니다.
   for (let offset = 0; ; offset += 1000) {
-    const page = await request<Rsvp[]>(
-      `rsvps?invitation_id=eq.${id}&select=${rsvpColumns}&order=id&limit=1000&offset=${offset}`,
-    );
+    const { data: page, error } = await client.from("rsvps").select(rsvpColumns)
+      .eq("invitation_id", id).order("id").range(offset, offset + 999);
+    if (error) throw new Error("응답을 조회하지 못했습니다.");
     responses.push(...page);
     if (page.length < 1000) break;
   }
@@ -65,16 +72,29 @@ export async function getInvitationWithResponses(id: string) {
 }
 
 export async function createInvitation(input: InvitationInput): Promise<Invitation> {
-  const rows = await request<Invitation[]>(`invitations?select=${invitationColumns}`, input);
-  if (!rows[0]) throw new Error("초대장을 저장하지 못했습니다.");
-  return rows[0];
+  const user = await currentUser();
+  if (!user) throw new Error("로그인이 필요합니다.");
+  const client = await createAuthClient();
+  const { data, error } = await client.from("invitations")
+    .insert({ ...input, host_id: user.id }).select(invitationColumns).single();
+  if (error || !data) throw new Error("초대장을 저장하지 못했습니다.");
+  return data;
 }
 
-export async function createRsvp(invitationId: string, input: RsvpInput): Promise<Rsvp> {
-  const rows = await request<Rsvp[]>(`rsvps?select=${rsvpColumns}`, {
+export async function createRsvp(invitationId: string, input: RsvpInput): Promise<void> {
+  // Anonymous guests may insert, but cannot SELECT even their submitted row.
+  await request<void>("rsvps", {
     ...input,
     invitation_id: invitationId,
-  });
-  if (!rows[0]) throw new Error("응답을 저장하지 못했습니다.");
-  return rows[0];
+  }, true);
+}
+
+export async function getHostInvitations(): Promise<Invitation[]> {
+  const user = await currentUser();
+  if (!user) return [];
+  const client = await createAuthClient();
+  const { data, error } = await client.from("invitations").select(invitationColumns)
+    .eq("host_id", user.id).order("id");
+  if (error) throw new Error("초대장 목록을 조회하지 못했습니다.");
+  return data;
 }

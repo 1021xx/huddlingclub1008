@@ -35,7 +35,7 @@ export default function RSVPCard({ className = "", state = "form", response, onS
         event.preventDefault();
         if (!onSubmit || !name.trim() || pending)
             return;
-        const data = { name: name.trim(), status, companions };
+        const data = { name: name.trim(), status, companions: status === "no" ? 0 : companions };
         setPending(true);
         setError("");
         try {
@@ -78,10 +78,10 @@ export default function RSVPCard({ className = "", state = "form", response, onS
                 <RadioOption className="flex-1" label="불참" name={groupId} value="no" checked={status === "no"} onChange={() => setStatus("no")} required showRequired={false}/>
               </div>
             </fieldset>
-            <div role="group" aria-labelledby={groupId + "-companions"} className="space-y-inline-md">
-              <Label id={groupId + "-companions"} label="동반 인원"/>
-              <div><Stepper value={companions} onValueChange={setCompanions} disabled={pending}/></div>
-              <p className="text-caption-md text-text-tertiary">본인을 제외하고 함께 오는 인원이에요.</p>
+            <div role="group" aria-labelledby={groupId + "-companions"} aria-disabled={status === "no" || pending} className={`space-y-inline-md ${status === "no" ? "opacity-50" : ""}`}>
+              <Label id={groupId + "-companions"} label="동반 인원" required={status === "yes"}/>
+              <div><Stepper value={status === "no" ? 0 : companions} onValueChange={setCompanions} disabled={pending || status === "no"}/></div>
+              <p className="text-caption-md text-text-tertiary">{status === "no" ? "불참할 때는 동반 인원을 선택하지 않아요." : "본인을 제외하고 함께 오는 인원이에요."}</p>
             </div>
           </fieldset>
           <Button size="lg" type="submit" className="w-full" disabled={!name.trim() || pending}>{pending ? "보내는 중…" : "참석 여부 보내기"}</Button>

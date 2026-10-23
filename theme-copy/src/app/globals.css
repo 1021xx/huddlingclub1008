@@ -354,8 +354,25 @@ input::placeholder, textarea::placeholder { color: #8e809d; }
   animation: border-beam-travel 8s linear infinite reverse;
 }
 @keyframes border-beam-travel { to { --beam-angle: 360deg; } }
-.party-mascots { display: flex; align-items: center; justify-content: space-between; width: 100%; margin: -10px 0 12px; z-index: 1; }
-.party-mascots > span { color: #d5c3e3; font-size: 12px; line-height: 1.7; text-align: right; padding-right: 8px; }
+/* Full-size cover avatars still scale down on narrow screens. */
+.party-mascots {
+  container-type: inline-size;
+  --party-bot-ghost-size: min(112px, 34cqi);
+  --party-bot-cat-size: min(96px, 29cqi);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-inline-md);
+  width: 100%;
+  margin: -10px 0 12px;
+  z-index: 1;
+}
+/* Only the inset create preview uses the smaller avatars. */
+.create-content .party-mascots {
+  --party-bot-ghost-size: min(96px, 26cqi);
+  --party-bot-cat-size: min(82px, 22cqi);
+}
+.party-mascots > span { flex-shrink: 0; white-space: nowrap; color: #d5c3e3; font-size: 12px; line-height: 1.7; text-align: right; padding-right: 8px; }
 .party-bots { display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
 .party-bots > :last-child:not(:first-child) { margin-left: -25px; }
 .party-bots--compact { height: 76px; }
@@ -377,8 +394,32 @@ input::placeholder, textarea::placeholder { color: #8e809d; }
 .party-footer { padding: 25px 20px 32px; text-align: center; border-top: 1px solid #302338; }
 .party-footer p { color: #a18baf; font-size: 9px; letter-spacing: 2px; margin-bottom: 16px; }
 .party-footer div { display: flex; justify-content: center; gap: 24px; }
-.party-footer a { color: #cab4dc; font-size: 12px; text-underline-offset: 4px; }
-.party-footer a:hover, .party-site-nav a:hover { color: #ffad72; text-decoration: underline; }
+.party-footer a, .party-host-nav a, .party-host-nav button { color: #cab4dc; font-size: 12px; text-underline-offset: 4px; }
+.party-footer a:hover, .party-site-nav a:hover, .party-host-nav a:hover, .party-host-nav button:hover { color: #ffad72; text-decoration: underline; }
+.party-card-link {
+  --party-link-accent: var(--color-action-secondary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-inline-compact);
+  min-height: var(--spacing-step-button);
+  padding: var(--spacing-inline-md) var(--spacing-stack-md);
+  border: var(--border-width-default) solid color-mix(in srgb, var(--party-link-accent) 35%, transparent);
+  border-radius: var(--radius-pill);
+  background: color-mix(in srgb, var(--party-link-accent) 10%, transparent);
+  color: var(--party-link-accent);
+  font-size: var(--text-caption-md);
+  font-weight: 600;
+  white-space: nowrap;
+  transition: background-color .2s, border-color .2s, transform .2s;
+}
+.party-card-link--responses { --party-link-accent: var(--color-action-primary); }
+.party-card-link:hover {
+  background: color-mix(in srgb, var(--party-link-accent) 20%, transparent);
+  border-color: var(--party-link-accent);
+  transform: translateY(-2px);
+}
+.party-card-link:active { transform: translateY(0); }
 @media (max-width: 359px) {
   .party-wordmark { font-size: 48px; }
   .party-mascots > span { font-size: 11px; }

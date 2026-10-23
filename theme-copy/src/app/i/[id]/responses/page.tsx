@@ -7,6 +7,8 @@ import StatCard from "@/components/StatCard";
 import ResponseRowTrue from "@/components/ResponseRow/true";
 import { getInvitationWithResponses } from "@/lib/supabase";
 import CopyInvitationButton from "./CopyInvitationButton";
+import { requireUser } from "@/lib/auth/server";
+import HostNav from "@/components/HostNav";
 
 export const metadata: Metadata = {
   title: "응답 현황 | Huddling Club",
@@ -15,6 +17,7 @@ export const metadata: Metadata = {
 
 export default async function ResponsesPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
+  await requireUser(`/i/${id}/responses`);
   const invitation = await getInvitationWithResponses(id);
   if (!invitation) notFound();
   const { responses } = invitation;
@@ -26,6 +29,7 @@ export default async function ResponsesPage({ params }: { params: Promise<{ id: 
     <main className="mx-auto min-h-dvh w-full max-w-invitation bg-surface-default">
       <NavBar title="응답 현황" />
       <div className="space-y-section-lg px-page-horizontal pb-cover-inset pt-page-horizontal">
+        <HostNav />
         <SectionHeader subtitle="Responses" title={invitation.title} description={`${invitation.date} · ${invitation.location}`} />
         <div className="flex gap-inline-md">
           <StatCard className="min-w-none flex-1" label="참석" value={`${attending.length}명`} />

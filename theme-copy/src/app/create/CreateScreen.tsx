@@ -15,6 +15,7 @@ import CopyLinkField from "@/components/CopyLinkField";
 import SuccessIcon from "@/components/SuccessIcon";
 import PartyConfetti from "../../components/PartyConfetti";
 import PartyBots from "../../components/PartyBots";
+import HostNav from "@/components/HostNav";
 
 export default function CreateScreen() {
   const router = useRouter();
@@ -41,6 +42,10 @@ export default function CreateScreen() {
         body: JSON.stringify({ title, date, location, body }),
       });
       const result = await response.json();
+      if (response.status === 401) {
+        router.push("/login?next=%2Fcreate");
+        return;
+      }
       if (!response.ok) {
         setError(result.error || "초대장을 발행하지 못했어요. 다시 시도해 주세요.");
         return;
@@ -62,6 +67,7 @@ export default function CreateScreen() {
         <NavBar title="발행 완료" />
         <PartyConfetti />
         <div className="flex flex-col gap-section-lg px-page-horizontal pb-cover-inset">
+          <HostNav />
           <div className="flex flex-col items-center gap-stack-sm py-section-lg text-center">
             <PartyBots compact />
             <SuccessIcon />
@@ -72,7 +78,7 @@ export default function CreateScreen() {
             />
           </div>
           <CopyLinkField title="초대장 링크" url={`${publishedOrigin}/i/${publishedId}`} description="게스트에게 공유하는 초대장 링크예요." />
-          <CopyLinkField title="응답 현황 링크" url={`${publishedOrigin}/i/${publishedId}/responses`} description="참석 응답 현황을 확인하는 링크예요." />
+          <CopyLinkField title="응답 현황 링크" url={`${publishedOrigin}/i/${publishedId}/responses`} description="초대장을 만든 계정으로 로그인해야 볼 수 있어요." />
           <Button
             size="lg"
             className="w-full"
@@ -87,6 +93,7 @@ export default function CreateScreen() {
   return (
     <main className="mx-auto min-h-dvh w-full max-w-invitation bg-surface-default">
       <NavBar title="초대장 만들기" />
+      <div className="px-page-horizontal py-control-compact"><HostNav /></div>
       <form id="create-invitation" onSubmit={publish} aria-busy={pending} className="create-content space-y-section-lg px-page-horizontal pt-control-compact">
         <div className="party-form-intro"><span>MAKE A LITTLE MAGIC</span><h1>수상한 밤의 초대장</h1><p>우리만의 할로윈 파티를 시작해요.</p></div>
         <fieldset disabled={pending} className="space-y-stack-lg">

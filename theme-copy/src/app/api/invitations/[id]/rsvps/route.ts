@@ -12,8 +12,8 @@ export async function POST(request: Request, { params }: { params: Promise<{ id:
     if (!await getInvitation(id)) {
       return Response.json({ error: "초대장을 찾을 수 없어요." }, { status: 404 });
     }
-    const rsvp = await createRsvp(id, input);
-    return Response.json({ rsvp }, { status: 201 });
+    await createRsvp(id, input);
+    return Response.json({ success: true }, { status: 201 });
   } catch (error) {
     return apiError(error);
   }
