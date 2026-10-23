@@ -1,6 +1,6 @@
 # 🎉 웹 초대장 제작 및 참석 응답(RSVP) 관리 토이 프로젝트
 
-**Huddling Club 초보자-챌린지 학습내용입니다**
+** Huddling Club 초보자-챌린지 학습내용입니다 **
 
 Next.js와 Supabase를 활용해 모바일 웹 초대장을 만들고, 링크로 공유하며, 참석 여부를 수집하는 개인 학습 프로젝트입니다.
 
@@ -9,7 +9,7 @@ UI/UX 디자인부터 프론트엔드 구현, 인증과 데이터베이스 연�
 > 학습 및 기능 검증을 위한 프로토타입으로, 실제 상용 서비스가 아닙니다.
 
 ## 🔗 Demo
-
+할로윈 초대장 💌 (https://huddlingclub1008-pi.vercel.app/i/b34ba675-ec4c-4abd-be36-198265908b0d)
 [Huddling Club 미리보기](https://huddlingclub1008-pi.vercel.app)
 
 ## ✨ 주요 기능
