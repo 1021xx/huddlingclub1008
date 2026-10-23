@@ -10,6 +10,7 @@ UI/UX 디자인부터 프론트엔드 구현, 인증과 데이터베이스 연�
 
 ## 🔗 Demo
 할로윈 초대장 💌 (https://huddlingclub1008-pi.vercel.app/i/b34ba675-ec4c-4abd-be36-198265908b0d)
+
 [Huddling Club 미리보기](https://huddlingclub1008-pi.vercel.app)
 
 ## ✨ 주요 기능
