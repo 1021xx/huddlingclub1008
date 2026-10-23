@@ -2,6 +2,8 @@
 
 import { useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
+import useInvitationDraft from "@/lib/use-invitation-draft";
 import Button from "@/components/Button";
 import Image from "@/components/Image";
 import InfoRow from "@/components/InfoRow";
@@ -19,13 +21,11 @@ import HostNav from "@/components/HostNav";
 
 export default function CreateScreen() {
   const router = useRouter();
-  const [title, setTitle] = useState("");
-  const [date, setDate] = useState("");
-  const [location, setLocation] = useState("");
-  const [body, setBody] = useState("");
+  const { title, date, location, body, setField, clearDraft } = useInvitationDraft();
   const [publishedId, setPublishedId] = useState("");
   const [pending, setPending] = useState(false);
   const [error, setError] = useState("");
+  const [needsLogin, setNeedsLogin] = useState(false);
   const [publishedOrigin, setPublishedOrigin] = useState("");
   const titleTooLong = title.split("\n").length > 2;
   const canPublish = [title, date, location, body].every(value => value.trim()) && !titleTooLong;
@@ -43,7 +43,8 @@ export default function CreateScreen() {
       });
       const result = await response.json();
       if (response.status === 401) {
-        router.push("/login?next=%2Fcreate");
+        setNeedsLogin(true);
+        setError("로그인 후 초대장을 만들어 주세요. 작성한 내용은 이 탭에 임시 저장했어요.");
         return;
       }
       if (!response.ok) {
@@ -53,6 +54,7 @@ export default function CreateScreen() {
       if (typeof result.invitation?.id !== "string") throw new Error("Invalid response");
       setPublishedOrigin(window.location.origin);
       setPublishedId(result.invitation.id);
+      clearDraft();
       window.scrollTo({ top: 0 });
     } catch {
       setError("초대장을 발행하지 못했어요. 연결을 확인하고 다시 시도해 주세요.");
@@ -107,13 +109,12 @@ export default function CreateScreen() {
             showHelper
             value={title}
             aria-invalid={titleTooLong}
-            onChange={event => setTitle(event.target.value)}
+            onChange={event => setField("title", event.target.value)}
           />
-          <Input label="일시" name="date" maxLength={200} placeholder="예) 2026년 10월 31일 (토) 19:00" value={date} onChange={event => setDate(event.target.value)} />
-          <Input label="장소" name="location" maxLength={500} placeholder="예) 허들링 아지트 · 서울" value={location} onChange={event => setLocation(event.target.value)} />
-          <Textarea label="본문" name="body" maxLength={10000} rows={4} value={body} onChange={event => setBody(event.target.value)} />
+          <Input label="일시" name="date" maxLength={200} placeholder="예) 2026년 10월 31일 (토) 19:00" value={date} onChange={event => setField("date", event.target.value)} />
+          <Input label="장소" name="location" maxLength={500} placeholder="예) 허들링 아지트 · 서울" value={location} onChange={event => setField("location", event.target.value)} />
+          <Textarea label="본문" name="body" maxLength={10000} rows={4} value={body} onChange={event => setField("body", event.target.value)} />
         </fieldset>
-        {error && <p role="alert" className="text-caption-md text-feedback-error">{error}</p>}
 
         <section aria-labelledby="preview-label" className="flex h-create-preview min-h-none flex-col gap-inline-md">
           <Label id="preview-label" label="미리보기" required={false} />
@@ -143,8 +144,13 @@ export default function CreateScreen() {
         </section>
       </form>
 
-      <footer className="create-footer fixed bottom-0 left-1/2 z-10 w-full max-w-invitation -translate-x-1/2 bg-surface-default px-page-horizontal pt-page-horizontal">
-        <Button type="submit" form="create-invitation" size="lg" className="w-full" disabled={!canPublish || pending}>{pending ? "발행하는 중…" : "발행하기"}</Button>
+      <footer className="create-footer fixed bottom-0 left-1/2 z-10 w-full max-w-invitation -translate-x-1/2 space-y-inline-md bg-surface-default px-page-horizontal pt-page-horizontal">
+        {error && <p role="alert" className="text-caption-md text-feedback-error">{error}</p>}
+        {needsLogin ? (
+          <Link href="/login?next=%2Fcreate" className="party-button flex h-button-lg items-center justify-center rounded-control bg-action-primary text-label-lg focus-visible:component-focus">로그인하고 계속하기</Link>
+        ) : (
+          <Button type="submit" form="create-invitation" size="lg" className="w-full" disabled={!canPublish || pending}>{pending ? "발행하는 중…" : "발행하기"}</Button>
+        )}
       </footer>
     </main>
   );

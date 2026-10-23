@@ -25,9 +25,9 @@ export default async function HostPage() {
               <li key={invitation.id} className="space-y-stack-sm rounded-card bg-surface-subtle p-page-horizontal">
                 <h2 className="whitespace-pre-wrap break-words text-heading-md text-text-primary">{invitation.title}</h2>
                 <p className="break-words text-body-md text-text-tertiary">{invitation.date} · {invitation.location}</p>
-                <div className="flex flex-wrap gap-inline-md">
-                  <Link href={`/i/${invitation.id}`} className="party-card-link focus-visible:component-focus"><span aria-hidden="true">✉</span>초대장 보기</Link>
-                  <Link href={`/i/${invitation.id}/responses`} className="party-card-link party-card-link--responses focus-visible:component-focus">응답 현황<span aria-hidden="true">↗</span></Link>
+                <div className="flex flex-wrap gap-stack-md text-label-md text-action-primary">
+                  <Link href={`/i/${invitation.id}`} className="underline underline-offset-4 focus-visible:component-focus">초대장 보기</Link>
+                  <Link href={`/i/${invitation.id}/responses`} className="underline underline-offset-4 focus-visible:component-focus">응답 현황</Link>
                 </div>
               </li>
             ))}

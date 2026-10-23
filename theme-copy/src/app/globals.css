@@ -396,30 +396,6 @@ input::placeholder, textarea::placeholder { color: #8e809d; }
 .party-footer div { display: flex; justify-content: center; gap: 24px; }
 .party-footer a, .party-host-nav a, .party-host-nav button { color: #cab4dc; font-size: 12px; text-underline-offset: 4px; }
 .party-footer a:hover, .party-site-nav a:hover, .party-host-nav a:hover, .party-host-nav button:hover { color: #ffad72; text-decoration: underline; }
-.party-card-link {
-  --party-link-accent: var(--color-action-secondary);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--spacing-inline-compact);
-  min-height: var(--spacing-step-button);
-  padding: var(--spacing-inline-md) var(--spacing-stack-md);
-  border: var(--border-width-default) solid color-mix(in srgb, var(--party-link-accent) 35%, transparent);
-  border-radius: var(--radius-pill);
-  background: color-mix(in srgb, var(--party-link-accent) 10%, transparent);
-  color: var(--party-link-accent);
-  font-size: var(--text-caption-md);
-  font-weight: 600;
-  white-space: nowrap;
-  transition: background-color .2s, border-color .2s, transform .2s;
-}
-.party-card-link--responses { --party-link-accent: var(--color-action-primary); }
-.party-card-link:hover {
-  background: color-mix(in srgb, var(--party-link-accent) 20%, transparent);
-  border-color: var(--party-link-accent);
-  transform: translateY(-2px);
-}
-.party-card-link:active { transform: translateY(0); }
 @media (max-width: 359px) {
   .party-wordmark { font-size: 48px; }
   .party-mascots > span { font-size: 11px; }
